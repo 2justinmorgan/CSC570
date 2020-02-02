@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">emulate</string>
+    <string name="servicedesc">service</string>
+    <string name="aiddescription">aid</string>
+</resources>
