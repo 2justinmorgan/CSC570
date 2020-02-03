@@ -22,6 +22,7 @@ class HostCardEmulatorService: HostApduService() {
 
     override fun processCommandApdu(commandApdu: ByteArray?,
                                     extras: Bundle?): ByteArray {
+        Log.d(TAG, "in process command")
         if (commandApdu == null) {
             return Utils.hexStringToByteArray(STATUS_FAILED)
         }
