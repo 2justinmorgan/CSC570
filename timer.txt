@@ -1,0 +1,50 @@
+2018-01-10 08:12:06.870 6753-6769/com.example.read D/TAG: reader:      4 ms, connected
+2018-01-10 08:12:06.871 6753-6769/com.example.read D/TAG: reader:      78 ms, response received
+2018-01-10 08:12:06.871 6753-6769/com.example.read D/TAG: reader:      16 ms, connection closed
+2018-01-10 08:12:06.871 6753-6769/com.example.read D/TAG: reader: end, 98 ms
+2018-01-10 08:12:07.209 6753-6799/com.example.read D/TAG: reader: begin
+2018-01-10 08:12:07.210 6753-6799/com.example.read D/TAG: reader:      5 ms, connected
+2018-01-10 08:12:07.210 6753-6799/com.example.read D/TAG: reader:      45 ms, response received
+2018-01-10 08:12:07.211 6753-6799/com.example.read D/TAG: reader:      21 ms, connection closed
+2018-01-10 08:12:07.211 6753-6799/com.example.read D/TAG: reader: end, 71 ms
+2018-01-10 08:13:48.333 6753-6770/com.example.read D/TAG: reader: begin
+2018-01-10 08:13:48.333 6753-6770/com.example.read D/TAG: reader:      4 ms, connected
+2018-01-10 08:13:48.333 6753-6770/com.example.read D/TAG: reader:      43 ms, response received
+2018-01-10 08:13:48.333 6753-6770/com.example.read D/TAG: reader:      16 ms, connection closed
+2018-01-10 08:13:48.333 6753-6770/com.example.read D/TAG: reader: end, 63 ms
+2018-01-10 08:14:01.178 6753-6769/com.example.read D/TAG: reader: begin
+2018-01-10 08:14:01.178 6753-6769/com.example.read D/TAG: reader:      7 ms, connected
+2018-01-10 08:14:01.178 6753-6769/com.example.read D/TAG: reader:      43 ms, response received
+2018-01-10 08:14:01.178 6753-6769/com.example.read D/TAG: reader:      16 ms, connection closed
+2018-01-10 08:14:01.178 6753-6769/com.example.read D/TAG: reader: end, 66 ms
+2018-01-10 08:14:02.145 6753-6799/com.example.read D/TAG: reader: begin
+2018-01-10 08:14:02.145 6753-6799/com.example.read D/TAG: reader:      4 ms, connected
+2018-01-10 08:14:02.146 6753-6799/com.example.read D/TAG: reader:      44 ms, response received
+2018-01-10 08:14:02.146 6753-6799/com.example.read D/TAG: reader:      22 ms, connection closed
+2018-01-10 08:14:02.146 6753-6799/com.example.read D/TAG: reader: end, 70 ms
+2018-01-10 08:14:03.140 6753-6770/com.example.read D/TAG: reader: begin
+2018-01-10 08:14:03.142 6753-6770/com.example.read D/TAG: reader:      6 ms, connected
+2018-01-10 08:14:03.142 6753-6770/com.example.read D/TAG: reader:      47 ms, response received
+2018-01-10 08:14:03.142 6753-6770/com.example.read D/TAG: reader:      24 ms, connection closed
+2018-01-10 08:14:03.142 6753-6770/com.example.read D/TAG: reader: end, 77 ms
+2018-01-10 08:14:04.190 6753-6769/com.example.read D/TAG: reader: begin
+2018-01-10 08:14:04.190 6753-6769/com.example.read D/TAG: reader:      4 ms, connected
+2018-01-10 08:14:04.190 6753-6769/com.example.read D/TAG: reader:      31 ms, response received
+2018-01-10 08:14:04.191 6753-6769/com.example.read D/TAG: reader:      22 ms, connection closed
+2018-01-10 08:14:04.191 6753-6769/com.example.read D/TAG: reader: end, 57 ms
+2018-01-10 08:14:05.236 6753-6799/com.example.read D/TAG: reader: begin
+2018-01-10 08:14:05.237 6753-6799/com.example.read D/TAG: reader:      4 ms, connected
+2018-01-10 08:14:05.237 6753-6799/com.example.read D/TAG: reader:      31 ms, response received
+2018-01-10 08:14:05.238 6753-6799/com.example.read D/TAG: reader:      18 ms, connection closed
+2018-01-10 08:14:05.238 6753-6799/com.example.read D/TAG: reader: end, 53 ms
+2018-01-10 08:14:06.139 6753-6770/com.example.read D/TAG: reader: begin
+2018-01-10 08:14:06.140 6753-6770/com.example.read D/TAG: reader:      5 ms, connected
+2018-01-10 08:14:06.141 6753-6770/com.example.read D/TAG: reader:      29 ms, response received
+2018-01-10 08:14:06.141 6753-6770/com.example.read D/TAG: reader:      20 ms, connection closed
+2018-01-10 08:14:06.141 6753-6770/com.example.read D/TAG: reader: end, 54 ms
+2018-01-10 08:14:07.088 6753-6769/com.example.read D/TAG: reader: begin
+2018-01-10 08:14:07.089 6753-6769/com.example.read D/TAG: reader:      5 ms, connected
+2018-01-10 08:14:07.089 6753-6769/com.example.read D/TAG: reader:      34 ms, response received
+2018-01-10 08:14:07.090 6753-6769/com.example.read D/TAG: reader:      18 ms, connection closed
+2018-01-10 08:14:07.090 6753-6769/com.example.read D/TAG: reader: end, 57 ms
+
