@@ -1,0 +1,5 @@
+# Ignore .sw? files
+**/.*.sw?
+
+# Ignore .class files
+**/*.class
