@@ -1,6 +1,10 @@
 // A Java program for a Proxy 
 import java.net.*; 
 import java.io.*; 
+import java.util.concurrent.TimeUnit;
+import java.io.FileWriter;
+import java.lang.String;
+
 
 public class Proxy 
 { 
@@ -42,6 +46,7 @@ public class Proxy
 		// string to read message from input 
 		String line = ""; 
 
+
 		// keep reading until "Over" is input 
 		while (!line.equals("Over")) 
 		{ 
@@ -49,10 +54,15 @@ public class Proxy
 			{ 
                                 /* Writes to server */
 				line = input.readLine(); 
+                                long startTime = System.nanoTime();
 				out.writeUTF(line); 
 
                                 /* Response from server */
 				line = in.readUTF(); 
+                                long endTime = System.nanoTime();
+                                long elapsedTime = endTime - startTime;
+                                System.out.print("Elapsed time: ");
+                                System.out.println(elapsedTime);
 
                                 /* Print */
                                 System.out.print("Received back from server: ");
