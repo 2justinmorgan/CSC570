@@ -1,41 +1,105 @@
 // A Java program for a Server 
 import java.net.*; 
 import java.io.*; 
+import java.util.concurrent.TimeUnit;
+import java.io.FileWriter;
+import java.lang.String;
+
 
 public class Server 
 { 
 	//initialize socket and input stream 
-	private Socket		 socket = null; 
-	private ServerSocket server = null; 
-	private DataInputStream in	 = null; 
+	private Socket		 proxySocket = null; 
+	private ServerSocket proxyServer = null; 
+	private Socket		 moleSocket = null; 
+	private ServerSocket moleServer = null; 
+
+	private DataInputStream proxyIn	        = null; 
+	private DataOutputStream proxyOut	= null; 
+	private DataInputStream moleIn 	        = null; 
+	private DataOutputStream moleOut	= null; 
 
 	// constructor with port 
 	public Server(int port) 
 	{ 
 		// starts server and waits for a connection 
+                int proxyPort = 5018;
+                int molePort = 5019;
 		try
 		{ 
-			server = new ServerSocket(port); 
-			System.out.println("Server started"); 
+			proxyServer = new ServerSocket(proxyPort); 
+			moleServer = new ServerSocket(molePort); 
+			System.out.println("Servers started"); 
 
-			System.out.println("Waiting for a client ..."); 
+			System.out.println("Waiting for a proxy ..."); 
 
-			socket = server.accept(); 
-			System.out.println("Client accepted"); 
+			proxySocket = proxyServer.accept(); 
+			System.out.println("Proxy accepted"); 
+
+			System.out.println("Waiting for a mole ..."); 
+
+			moleSocket = moleServer.accept(); 
+			System.out.println("Mole accepted"); 
 
 			// takes input from the client socket 
-			in = new DataInputStream( 
-				new BufferedInputStream(socket.getInputStream())); 
+			proxyIn = new DataInputStream( 
+				new BufferedInputStream(proxySocket.getInputStream())); 
+			moleIn = new DataInputStream( 
+				new BufferedInputStream(moleSocket.getInputStream())); 
+
+			// sends output to the socket 
+			proxyOut = new DataOutputStream(proxySocket.getOutputStream()); 
+			moleOut = new DataOutputStream(moleSocket.getOutputStream()); 
 
 			String line = ""; 
+
+                        FileWriter fout = new FileWriter("server_log.txt");
+                        int count = 0;
 
 			// reads message from client until "Over" is sent 
 			while (!line.equals("Over")) 
 			{ 
 				try
 				{ 
-					line = in.readUTF(); 
+                                        /* proxy in */
+					line = proxyIn.readUTF(); 
+                                        System.out.print("From proxy: ");
 					System.out.println(line); 
+
+                                        /* mole out */
+                                        System.out.print("Writing to mole: ");
+                                        System.out.println(line);
+                                        long startTime = System.nanoTime();
+                                        moleOut.writeUTF(line);
+
+                                        /* mole in */
+					line = moleIn.readUTF(); 
+                                        long endTime = System.nanoTime();
+                                        long elapsedTime = endTime - startTime;
+                                        fout.write(Long.toString(elapsedTime));
+                                        fout.write("\n");
+                                        if (++count > 15) {
+                                            fout.close();
+                                            System.exit(0);
+                                        }
+                                        System.out.print("Elapsed time: ");
+                                        System.out.println(elapsedTime);
+
+                                        System.out.print("From mole: ");
+					System.out.println(line); 
+
+                                        /* proxy out */
+                                        System.out.print("Writing to proxy: ");
+                                        System.out.println(line);
+                                        proxyOut.writeUTF(line);
+                                        /*
+                                        if (line.equals("Foo")) {
+                                            out.writeUTF("Bar");
+                                        }
+                                        else {
+                                            out.writeUTF("Foo");
+                                        }
+                                        */
 
 				} 
 				catch(IOException i) 
@@ -46,8 +110,12 @@ public class Server
 			System.out.println("Closing connection"); 
 
 			// close connection 
-			socket.close(); 
-			in.close(); 
+			proxySocket.close(); 
+			moleSocket.close(); 
+			proxyIn.close(); 
+			proxyOut.close(); 
+			moleIn.close(); 
+			moleOut.close(); 
 		} 
 		catch(IOException i) 
 		{ 
