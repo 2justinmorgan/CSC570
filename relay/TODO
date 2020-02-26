@@ -1,0 +1,3 @@
+Fix Java exception explosions
+Make IP address + port command line arguments
+Cleanup Proxy, Mole, and Server code
