@@ -3,6 +3,7 @@ import android.nfc.cardemulation.HostApduService
 import android.os.Bundle
 import android.util.Log
 
+
 class HostCardEmulatorService: HostApduService() {
 
     companion object {
@@ -16,33 +17,40 @@ class HostCardEmulatorService: HostApduService() {
         val DEFAULT_CLA = "00"
         val MIN_APDU_LENGTH = 12
     }
+
     override fun onDeactivated(reason: Int) {
         Log.d(TAG, "Deactivated: " + reason)
+        //close connection
+        //val proxy = (this.getApplication() as RunProxy).proxy
+        //val t = Thread(Runnable { proxy?.sendData("Exit") })
+        //t.start()
+        //t.join()
     }
 
     override fun processCommandApdu(commandApdu: ByteArray?,
                                     extras: Bundle?): ByteArray {
-        Log.d(TAG, "in process command")
+
         if (commandApdu == null) {
             return Utils.hexStringToByteArray(STATUS_FAILED)
         }
+
+        val proxy = (this.getApplication() as RunProxy).proxy
         val hexCommandApdu = Utils.toHex(commandApdu)
-        if (hexCommandApdu.length < MIN_APDU_LENGTH) {
+        var response = ""
+
+        if (proxy != null) {
+            //put command apdu in server
+            var t = Thread(Runnable { proxy.sendData(hexCommandApdu) })
+            t.start()
+            t.join()
+            //return response from server in result
+            t = Thread(Runnable {response = (proxy.getData()) })
+            t.start()
+            t.join()
+        }
+        if (response == "") {
             return Utils.hexStringToByteArray(STATUS_FAILED)
         }
-
-        if (hexCommandApdu.substring(0, 2) != DEFAULT_CLA) {
-            return Utils.hexStringToByteArray(CLA_NOT_SUPPORTED)
-        }
-
-        if (hexCommandApdu.substring(2, 4) != SELECT_INS) {
-            return Utils.hexStringToByteArray(INS_NOT_SUPPORTED)
-        }
-
-        if (hexCommandApdu.substring(10, 24) == AID)  {
-            return Utils.hexStringToByteArray(STATUS_SUCCESS)
-        } else {
-            return Utils.hexStringToByteArray(STATUS_FAILED)
-        }
+        return Utils.hexStringToByteArray(response)
     }
 }

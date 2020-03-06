@@ -1,7 +1,6 @@
-import java.io.BufferedReader
-import java.io.BufferedWriter
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
+package com.example.read
+
+import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -26,8 +25,8 @@ class Utils {
         private val HEX_CHARS_ARRAY = "0123456789ABCDEF".toCharArray()
         fun toHex(byteArray: ByteArray) : String {
             val result = StringBuffer()
-
             byteArray.forEach {
+
                 val octet = it.toInt()
                 val firstIndex = (octet and 0xF0).ushr(4)
                 val secondIndex = octet and 0x0F
@@ -41,10 +40,14 @@ class Utils {
         fun getFromServer(url: String) : String {
             val connection = URL(url).openConnection() as HttpURLConnection
             connection.setRequestMethod("GET")
-            val inputStream = connection.getInputStream()
+            var inputStream = connection.getInputStream()
+            while (inputStream == null) {
+                inputStream = connection.getInputStream()
+            }
             val inputStreamReader = InputStreamReader(inputStream)
             val bufferedReader = BufferedReader(inputStreamReader)
             val line = bufferedReader.readLine()
+
             connection.disconnect()
             return line
         }
