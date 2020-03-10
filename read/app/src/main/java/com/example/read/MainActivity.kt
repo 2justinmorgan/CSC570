@@ -29,7 +29,8 @@ class MainActivity : AppCompatActivity(), NfcAdapter.ReaderCallback {
         nfcAdapter?.disableReaderMode(this)
     }
     override fun onTagDiscovered(tag: Tag?) {
-        val timings = TimingLogger("TAG", "reader")
+        //run 'adb -s [#] shell setprop log.tag.timer VERBOSE' for timing output
+        val timings = TimingLogger("timer", "reader")
 
         val isoDep = IsoDep.get(tag)
         isoDep.connect()
