@@ -14,7 +14,6 @@ public class Proxy {
         // establish a connection
         try {
             socket = new Socket(address, port);
-            System.out.println("Connected");
 
             // takes input from terminal
             input = new DataInputStream(System.in);
@@ -36,7 +35,6 @@ public class Proxy {
         try {
             /* Response from server */
             line = in.readUTF();
-            System.out.println("reading: " + line);
         } catch (IOException i) {
             System.out.println(i);
         }
@@ -47,7 +45,6 @@ public class Proxy {
 
         try {
             /* Writes to server */
-            System.out.println("writing: " + line);
             out.writeUTF(line);
 
         } catch (IOException i) {
