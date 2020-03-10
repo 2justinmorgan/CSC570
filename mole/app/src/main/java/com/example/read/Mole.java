@@ -16,10 +16,8 @@ public class Mole {
     // constructor to put ip address and port
     public Mole(String address, int port) {
         // establish a connection
-        Log.d("mole", "in mole");
         try {
             socket = new Socket(address, port);
-            Log.d("mole", "Connected");
 
             // takes input from terminal
             input = new DataInputStream(System.in);

@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), NfcAdapter.ReaderCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
-        Thread(Runnable { mole = Mole("129.65.128.80", 5018)}).start()
+        Thread(Runnable { mole = Mole("129.65.128.80", 5019)}).start()
 
     }
 
@@ -44,12 +44,9 @@ class MainActivity : AppCompatActivity(), NfcAdapter.ReaderCallback {
         nfcAdapter?.disableReaderMode(this)
     }
     override fun onTagDiscovered(tag: Tag?) {
-        //run 'adb -d shell setprop log.tag.timer VERBOSE' for timing output
-        val timings = TimingLogger("timer", "reader")
 
         val isoDep = IsoDep.get(tag)
         isoDep.connect()
-        timings.addSplit("connected")
 
         //get msg from server to transceive
         var data = mole?.getData()
@@ -57,16 +54,11 @@ class MainActivity : AppCompatActivity(), NfcAdapter.ReaderCallback {
         while (data!= null && data != "Exit") {
             response = isoDep.transceive(Utils.hexStringToByteArray(data))
 
-            timings.addSplit("response received")
-
             //put response in server
             mole?.sendData(Utils.toHex(response))
             data = mole?.getData()
         }
         mole?.close()
         isoDep.close()
-        timings.addSplit("connection closed")
-        timings.dumpToLog()
-
     }
 }
